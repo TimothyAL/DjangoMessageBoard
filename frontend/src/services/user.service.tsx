@@ -6,12 +6,12 @@ class UserService {
         this.URI = 'http://localhost:8000'
     }
 
-    login(username: string) {
-        return axios.post(this.URI + '/users/' + username, username)
+    login(username: string, password: string) {
+        return axios.post(this.URI + '/users/' + username, {username: username, password: password})
     }
 
-    useLogin(username: string) {
-        return this.login(username)
+    useLogin(username: string, password: string) {
+        return this.login(username, password)
     }
 }
 

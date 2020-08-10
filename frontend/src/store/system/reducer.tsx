@@ -2,12 +2,14 @@ import {
     SystemState,
     SystemActionTypes,
     LOGIN,
-    UPDATE_USERNAME
+    UPDATE_USERNAME,
+    UPDATE_PASSWORD
 } from './types'
 
 const initialState: SystemState = {
     loggedIn: false,
-    username: ''
+    username: '',
+    password: ''
 }
 
 export function systemReducer(
@@ -17,6 +19,8 @@ export function systemReducer(
     switch (action.type) {
         case UPDATE_USERNAME:
             return Object.assign({}, state, {username: action.username})
+        case UPDATE_PASSWORD:
+            return Object.assign({}, state, {password: action.password})
         case LOGIN:
             return Object.assign({}, state, action.payload)
         default:

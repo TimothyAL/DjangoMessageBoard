@@ -3,7 +3,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Container, Box, TextField, Button} from '@material-ui/core';
 import UserService from "../../services/user.service";
-import { updateUsername } from "../../store/system/actions";
+import { updateUsername, updatePassword } from "../../store/system/actions";
+import {RootState} from '../../store/index'
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
@@ -16,12 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 )
 
-interface RootState {
-    system: {
-        username: string
-    }
-    
-}
+
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -30,15 +26,19 @@ const Login = () => {
     const classes = useStyles();
 
     const login = async () => {
-        const resp = await userService.useLogin(userState.username)
+        const resp = await userService.useLogin(userState.username, userState.password)
         if (resp.status !== 200) {
             console.log('request failed')
         }
-        console.log(userState.username, resp)
+        console.log(userState.username, userState.password)
     }
 
-    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const handleUsernameChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         dispatch(updateUsername(event.target.value))
+    }
+
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        dispatch(updatePassword(event.target.value))
     }
 
     return (
@@ -46,7 +46,12 @@ const Login = () => {
             <Container>
                 <Box>
                     <form className={classes.root} noValidate autoComplete='off'>
-                        <TextField id='username' label='Username' value={userState.username} onChange={handleChange}/>
+                        <div>
+                            <TextField id='username' label='Username' value={userState.username} onChange={handleUsernameChange}/>
+                        </div>
+                        <div>
+                            <TextField id='password' label='Password' type='password' value={userState.password} onChange={handlePasswordChange}/>
+                        </div>
                     </form>
                     <Button variant='contained' color='primary'
                     onClick={login}>
