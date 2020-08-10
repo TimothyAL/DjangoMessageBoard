@@ -1,6 +1,6 @@
 import {SystemState, LOGIN, UPDATE_USERNAME, UPDATE_PASSWORD, SystemActionTypes } from './types'
 
-export function updateLogin(newLogin: SystemState): SystemActionTypes {
+export function updateLogin(newLogin: boolean): SystemActionTypes {
     return {
         type: LOGIN,
         payload: newLogin

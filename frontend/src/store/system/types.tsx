@@ -11,7 +11,7 @@ export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 
 interface LoginAction {
     type: typeof LOGIN
-    payload: SystemState
+    payload: boolean
 }
 
 interface UpdateUsernameAction {

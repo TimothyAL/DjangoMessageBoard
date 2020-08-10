@@ -22,7 +22,7 @@ export function systemReducer(
         case UPDATE_PASSWORD:
             return Object.assign({}, state, {password: action.password})
         case LOGIN:
-            return Object.assign({}, state, action.payload)
+            return Object.assign({}, state, {loggedIn: action.payload})
         default:
             return state
     }
