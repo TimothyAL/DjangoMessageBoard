@@ -7,7 +7,7 @@ class UserService {
     }
 
     login(username: string) {
-        return axios.post(this.URI + '/user/' + username, username)
+        return axios.post(this.URI + '/users/' + username, username)
     }
 
     useLogin(username: string) {
