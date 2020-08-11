@@ -2,19 +2,21 @@ import React, {useEffect, useMemo} from "react";
 import { useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../store/index'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {Box, TextField} from '@material-ui/core'
+import {Container, TextField, Button} from '@material-ui/core'
 import { updateCurrentAuthor, updateCurrentDate, updateCurrentID, updateCurrentTitle, updateCurrentContent } from "../../store/threads/actions";
-import { createEditor } from 'slate'
-import { Slate, Editable, withReact } from 'slate-react'
-
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // ES6
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
         root: {
             '& > *': {
                 margin: theme.spacing(1),
-                width: '25ch'
+                width: '75%'
             }
+        },
+        title: {
+            fontSize: '22',
         }
     })
 )
@@ -24,7 +26,6 @@ const CreateThread = () => {
     const classes = useStyles();
     const threadState = useSelector((state: RootState) => state.threads);
     const userState = useSelector((state: RootState) => state.system);
-    const editor = useMemo(() => withReact(createEditor()), [])
 
     useEffect(() => {
         function setValues() {
@@ -40,22 +41,25 @@ const CreateThread = () => {
         dispatch(updateCurrentTitle(e.target.value))
     }
 
-    const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        dispatch(updateCurrentContent(e.target.value))
+    const handleContentChange = (content: string) => {
+        dispatch(updateCurrentContent(content))
     }
 
     return (
         <>
-            <Box className={classes.root}>
+            <Container className={classes.root}>
                 <form noValidate autoComplete='off'>
                     <div>
-                        <TextField id='title' label='Title of thread' value={threadState.currentThread.title} onChange={handleTitleChange} />
+                        <TextField fullWidth className={classes.title} id='title' label='Title of thread' value={threadState.currentThread.title} onChange={handleTitleChange} />
                     </div>
-                    <div>
-                        <Slate editor={editor} value={threadState.currentThread.content} onChange={handleContentChange} />
-                    </div>
+
                 </form>
-            </Box>
+                <ReactQuill value={threadState.currentThread.content} onChange={handleContentChange} />
+                <Button color='primary' variant='contained'>
+                    Submit Thread
+                </Button>
+            </Container>
+
         </>
     )
 

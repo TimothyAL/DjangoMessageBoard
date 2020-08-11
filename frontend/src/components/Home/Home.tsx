@@ -5,7 +5,6 @@ import {RootState} from '../../store/index'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Toolbar, Grid, Button} from '@material-ui/core'
 import DisplayThread from '../DisplayThread/DisplayThread'
-import CreateThread from '../CreateThread/CreateThread'
 import ThreadService from '../../services/thread.service'
 import { updateThreads } from "../../store/threads/actions";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
