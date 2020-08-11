@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../store/index'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Container, TextField, Button} from '@material-ui/core'
+import ThreadService from '../../services/thread.service'
 import { updateCurrentAuthor, updateCurrentDate, updateCurrentID, updateCurrentTitle, updateCurrentContent } from "../../store/threads/actions";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; // ES6
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 const CreateThread = () => {
+    const threadService = new ThreadService();
     const dispatch = useDispatch();
     const classes = useStyles();
     const threadState = useSelector((state: RootState) => state.threads);
@@ -45,6 +47,13 @@ const CreateThread = () => {
         dispatch(updateCurrentContent(content))
     }
 
+    const postThread = async () => {
+        const resp = await threadService.postThread(threadState.currentThread);
+        if (resp.status !== 200) {
+            window.alert("It's definitely Tim's fault")
+        }
+    }
+
     return (
         <>
             <Container className={classes.root}>
@@ -55,7 +64,8 @@ const CreateThread = () => {
 
                 </form>
                 <ReactQuill value={threadState.currentThread.content} onChange={handleContentChange} />
-                <Button color='primary' variant='contained'>
+                <Button color='primary' variant='contained'
+                onClick={postThread}>
                     Submit Thread
                 </Button>
             </Container>
