@@ -3,4 +3,6 @@ To start the user service...
 
 cd into `/userService`
 
-run `python -m userService.flaskapp.app` or `python3 -m userService.flaskapp.app`
+initialize the db with `python -m data` or `python3 -m data`
+
+run `python -m app` or `python3 -m app`
