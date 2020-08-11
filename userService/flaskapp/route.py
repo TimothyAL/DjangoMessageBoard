@@ -1,9 +1,10 @@
 ''' This file handles routing using a Blueprint '''
 
 from flask import Blueprint, request
-from userService.flaskapp.data import login
+from userService.flaskapp.data import login, get_boards
 
 user_bp = Blueprint('users', __name__)
+board_bp = Blueprint('boards', __name__)
 
 @user_bp.route('/users/<string:username>', methods=['POST'])
 def user_login(username):
@@ -13,4 +14,9 @@ def user_login(username):
 
         return login(input_dict['username'], input_dict['password'])
 
+
+@board_bp.route('/boards', methods=['GET'])
+def get_all_boards():
+    ''' This function retrieves all boards from the database'''
+    resp = get_boards()
 
