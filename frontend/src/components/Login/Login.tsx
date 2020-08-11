@@ -1,5 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from 'react-redux'
+import { useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Container, Box, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions} from '@material-ui/core';
 import UserService from "../../services/user.service";
@@ -21,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Login = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const userState = useSelector((state: RootState) => state.system);
     const userService = new UserService();
     const classes = useStyles();
@@ -47,10 +49,14 @@ const Login = () => {
 
     const handleDialogOpen = () => {
         setOpen(true);
+        
     }
 
     const handleDialogClose = () => {
         setOpen(false);
+        if (userState.loggedIn) {
+            history.push('/home')
+        }
     }
 
     return (

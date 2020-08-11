@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 app.register_blueprint(user_bp)
 
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 from gevent.pywsgi import WSGIServer
 
