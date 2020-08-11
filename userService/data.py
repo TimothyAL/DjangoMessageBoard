@@ -35,9 +35,9 @@ def register(username, password):
 def get_id_counter():
     '''This function will get a unique ID by pulling it from the counter field of a counter
     document, then increase the counter value.'''
-    return util.find_one_and_update({'_id': 'ID_COUNTER'},
-                                    {'$inc': {'count': 1}},
-                                    return_document=pymongo.ReturnDocument.AFTER)['count']
+    return users.find_one_and_update({'_id': 'ID_COUNTER'},
+                                     {'$inc': {'count': 1}},
+                                     return_document=pymongo.ReturnDocument.AFTER)['count']
 
 if __name__ == '__main__':
     users.drop()
