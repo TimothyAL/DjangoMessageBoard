@@ -3,7 +3,7 @@ import axios from 'axios'
 class UserService {
     URI: string;
     constructor() {
-        this.URI = 'http://localhost:8000'
+        this.URI = 'http://localhost:5000'
     }
 
     login(username: string, password: string) {
