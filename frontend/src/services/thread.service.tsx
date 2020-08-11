@@ -3,7 +3,7 @@ import axios from 'axios'
 class ThreadService {
     URI: string;
     constructor() {
-        this.URI = 'http://localhost:5000/boards'
+        this.URI = 'http://localhost:5001/boards'
     }
 
     getAllThreads() {
