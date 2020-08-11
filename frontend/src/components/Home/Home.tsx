@@ -30,6 +30,7 @@ export const Home = () => {
     useEffect(() => {
         async function getThreads() {
             const resp = await threadService.getAllThreads();
+            console.log(resp.data)
             dispatch(updateThreads(resp.data))
         }
         getThreads();

@@ -18,5 +18,8 @@ def user_login(username):
 @board_bp.route('/boards', methods=['GET'])
 def get_all_boards():
     ''' This function retrieves all boards from the database'''
-    resp = get_boards()
+    val = get_boards()
+    print(val, type(val))
+    return val
+
 

@@ -3,6 +3,7 @@ export interface ThreadsState {
 }
 
 export interface Thread {
+    _id: number
     author: string
     title: string
     content: string

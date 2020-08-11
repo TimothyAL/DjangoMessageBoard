@@ -5,19 +5,7 @@ import {
 } from './types'
 
 const initialState: ThreadsState = {
-    threads: [{
-        author: 'test user',
-        title: 'Title',
-        content: 'Test thread for testing',
-        date:'TEST DATE',
-        comments: []
-    },{
-        author: 'test user2',
-        title: 'Title 2',
-        content: 'Test thread for testing, the second',
-        date:'TEST DATE',
-        comments: []
-    }]
+    threads: []
 }
 
 export function threadReducer(
