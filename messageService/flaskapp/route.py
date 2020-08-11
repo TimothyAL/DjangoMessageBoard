@@ -15,6 +15,7 @@ def get_all_boards():
         print(val, type(val))
         return val
     elif request.method == 'POST':
+        print(request.json)
         return add_board(request.json)
     else:
         return jsonify('BAD REQUEST'), 400
@@ -26,6 +27,7 @@ def get_board_comments(board_name):
     if request.method == 'GET':
         return get_comments(board_name)
     elif request.method == 'POST':
+        print(request.json)
         return add_comment(request.json)
     else:
         return jsonify('BAD REQUEST'), 400
