@@ -16,6 +16,7 @@ export interface ThreadComment {
     author: string
     content: string
     date: string
+    comments: Array<ThreadComment>
 }
 
 export const UPDATE_THREADS = 'UPDATE_THREADS'
