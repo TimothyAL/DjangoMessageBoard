@@ -8,7 +8,6 @@ from route import user_bp
 app = Flask(__name__)
 
 app.register_blueprint(user_bp)
-app.register_blueprint(board_bp)
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
