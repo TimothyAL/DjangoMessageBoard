@@ -17,3 +17,15 @@ def login(username, password):
     code = 401
     
     return status, code    
+
+def register(username, password):
+    existing_users = users.find({'username': username})
+
+    if len(list(existing_users)) > 0:
+        status = 'User with that username exists'
+        code = 409
+        return status, code
+    
+    status = 'User registered'
+    code = 201
+    return status, code

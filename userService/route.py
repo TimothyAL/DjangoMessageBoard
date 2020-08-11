@@ -1,7 +1,7 @@
 ''' This file handles routing using a Blueprint '''
 
 from flask import Blueprint, request
-from data import login
+from data import login, register
 
 user_bp = Blueprint('users', __name__)
 
@@ -11,6 +11,24 @@ def user_login(username):
     if request.method == 'POST':
         input_dict = request.get_json(force=True)
 
-        return login(input_dict['username'], input_dict['password'])
+        required_fields = ['username', 'password']
 
+        if all(field in input_dict for field in required_fields):
+            return login(input_dict['username'], input_dict['password'])
 
+        else:
+            return 'Bad Request', 400
+
+@user_bp.route('/users', methods=['POST'])
+def user_register(username, password):
+    ''' This function is used for requests to register for an account '''
+    if request.method == 'POST':
+        input_dict = request.get_json(force=True)
+
+        required_fields = ['username', 'password']
+
+        if all(field in input_dict for field in required_fields):
+            return register(input_dict['username'], input_dict['password'])
+
+        else:
+            return 'Bad Request', 400
