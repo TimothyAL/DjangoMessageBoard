@@ -20,7 +20,7 @@ def user_login(username):
             return 'Bad Request', 400
 
 @user_bp.route('/users', methods=['POST'])
-def user_register(username, password):
+def user_register():
     ''' This function is used for requests to register for an account '''
     if request.method == 'POST':
         input_dict = request.get_json(force=True)
