@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Card, CardContent, Typography} from '@material-ui/core'
 import { Thread } from "../../store/threads/types";
+import { blueGrey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
         card: {
-            minWidth: 400
+            minWidth: 400,
+            backgroundColor:  '#c6c9c9'
         },
         meta: {
             fontSize: 14,
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-const DisplayThread = (props: { thread: { title: React.ReactNode; author: string; date: string; content: React.ReactNode; }; }) => {
+const DisplayThread = (props: {thread: Thread}) => {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -37,13 +39,6 @@ const DisplayThread = (props: { thread: { title: React.ReactNode; author: string
     )
 }
 
-// DisplayThread.propTypes = {
-//     thread: {
-//         author: PropTypes.string,
-//         content: PropTypes.string,
-//         date: PropTypes.string,
-//         comments: PropTypes.array
-//     }
-// }
+
 
 export default DisplayThread;

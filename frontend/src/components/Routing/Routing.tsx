@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Redirect, BrowserRouter as Router } from "react-router-dom";
 import Login from "../Login/Login";
 import {Home} from "../Home/Home";
+import CreateThread from "../CreateThread/CreateThread";
 
 const Routing = () => {
     return (
@@ -9,6 +10,7 @@ const Routing = () => {
             <Route exact path='/' component={Login}/>
             <Route exact path='/login' component={Login}/>
             <Route exact path='/home' component={Home}/>
+            <Route exact path='/createThread' component={CreateThread} />
         </Router>
     )
 }
