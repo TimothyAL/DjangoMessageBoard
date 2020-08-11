@@ -2,4 +2,5 @@
 **/Lib/
 **/Include/
 **/__pycache__/
+**/node_modules/
 pyvenv.cfg
