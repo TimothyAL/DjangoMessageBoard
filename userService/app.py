@@ -2,7 +2,7 @@
 
 from flask import Flask
 from flask_cors import CORS
-from userService.flaskapp.route import user_bp
+from route import user_bp
 
 app = Flask(__name__)
 

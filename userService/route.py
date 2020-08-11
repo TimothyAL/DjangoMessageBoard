@@ -1,7 +1,7 @@
 ''' This file handles routing using a Blueprint '''
 
 from flask import Blueprint, request
-from userService.flaskapp.data import login
+from data import login
 
 user_bp = Blueprint('users', __name__)
 
