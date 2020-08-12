@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1betal
+kind: Ingress
+metadata:
+  name: chatapp
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: chatapp.adnt
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: # the frontend
+          servicePort: # frontend port
+      - path: /users
+        backend:
+          serviceName: # user service name
+          servicePort: # user service port
+      - path: /boards
+        backend:
+          serviceName: # board service name
+          servicePort: # board service port
+      - path: /rabbit
+        backend:
+          serviceName: # service name for RabbitMQ
+          servicePort: # port for RabbitMQ
