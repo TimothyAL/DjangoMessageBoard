@@ -48,6 +48,10 @@ export const Home = () => {
         history.push('/createThread')
     }
 
+    const viewProfile = () => {
+        history.push('/profile')
+    }
+
     return (
         <>
             <Toolbar>
@@ -63,10 +67,10 @@ export const Home = () => {
                     className={classes.button}
                     variant='contained' 
                     color='primary'
-                    startIcon={<AccountCircleIcon />}>
+                    startIcon={<AccountCircleIcon />}
+                    onClick={viewProfile}>
                         My Profile
-                    </Button>
-                    
+                    </Button> 
             </Toolbar>
             <div className={classes.root}>
                 <Grid container spacing={1}>

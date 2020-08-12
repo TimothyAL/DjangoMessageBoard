@@ -17,11 +17,25 @@ def get_boards():
     return jsonify(all_boards), code
 
 def add_board(board):
+    new_id = get_id_counter()
+    print('new_id: ', new_id)
+    board['_id'] = new_id
+    print(board)
     try:
         boards.insert_one(board)
         return jsonify('BOARD CREATED'), 200
     except:
         return jsonify('ERROR'), 500
+
+def get_id_counter():
+    '''This function will get a unique ID by pulling it from the counter field of a counter
+    document, then increase the counter value.'''
+    _id = boards.find_one_and_update({'_id': 'ID COUNTER'},
+                                     {'$inc': {'count': 1}},
+                                     return_document=pymongo.ReturnDocument.AFTER)['count']
+    # _id = boards.find_one({'_id': 'ID COUNTER'})
+    print(_id)
+    return _id
 
 def get_comments(board):
     try:

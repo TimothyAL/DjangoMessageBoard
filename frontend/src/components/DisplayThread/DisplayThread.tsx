@@ -1,10 +1,8 @@
 import React from "react";
 import { useSelector} from 'react-redux'
-import PropTypes from 'prop-types';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Card, CardContent, Typography} from '@material-ui/core'
 import { Thread } from "../../store/threads/types";
-import { blueGrey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({

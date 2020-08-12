@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import {Thread} from '../store/threads/types'
 
 class ThreadService {
@@ -13,6 +13,7 @@ class ThreadService {
 
     postThread(thread: Thread ) {
         return axios.post(this.URI, thread)
+
     }
 }
 

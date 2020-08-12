@@ -1,5 +1,6 @@
 import React, {useEffect, useMemo} from "react";
 import { useDispatch, useSelector} from 'react-redux'
+import { useHistory } from "react-router-dom";
 import {RootState} from '../../store/index'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {Container, TextField, Button} from '@material-ui/core'
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const CreateThread = () => {
     const threadService = new ThreadService();
+    const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles();
     const threadState = useSelector((state: RootState) => state.threads);
@@ -52,6 +54,12 @@ const CreateThread = () => {
         if (resp.status !== 200) {
             window.alert("It's definitely Tim's fault")
         }
+        dispatch(updateCurrentContent(''))
+        dispatch(updateCurrentTitle(''))
+        dispatch(updateCurrentAuthor(''))
+        dispatch(updateCurrentID(-1))
+        dispatch(updateCurrentDate(new Date().toLocaleString().toString()))
+        history.push('/home')
     }
 
     return (
