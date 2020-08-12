@@ -1,6 +1,7 @@
 **/Scripts/
 **/Lib/
 **/Include/
+**/bin/
 **/__pycache__/
 **/node_modules/
 pyvenv.cfg
