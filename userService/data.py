@@ -26,11 +26,24 @@ def register(username, password):
         code = 409
         return status, code
     
-    users.insert_one({'_id': get_id_counter(), 'username': username, 'password': password})
+    users.insert_one({
+        '_id': get_id_counter(), 
+        'username': username, 
+        'password': password,
+        'chats': []
+        })
 
     status = 'User registered'
     code = 201
     return status, code
+
+def add_socket_id(username, socket_id):
+    users.find_one_and_update({'username': username}, {'$push': {'chats': socket_id}})
+    return 'Socket Registered', 200
+
+def remove_socket_id(username, socket_id):
+    users.find_one_and_update({'username': username}, {'$pull': {'chats': socket_id}})
+    return 'Socket Unregistered', 200
 
 def get_id_counter():
     '''This function will get a unique ID by pulling it from the counter field of a counter

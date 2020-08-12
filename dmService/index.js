@@ -1,23 +1,47 @@
 var app = require('express')(); // Only used to send garbage test client
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+var amqp = require('amqplib/callback_api')
 
-io.on('connection', (socket) => {
+amqp.connect('amqp://localhost', function(error0, connection) {
+    if (error0) {
+        throw error0;
+    }
 
-    console.log(`User ${socket.id} connected`)
+    connection.createChannel(function(error1, channel) {
+        if (error1) {
+            throw error1;
+        }
 
-    socket.on('disconnect', () => {
-        console.log('A user disconnected')
-    })
+        const queue = 'test'
 
-    socket.on('clientMessage', (msg) => {
-        console.log(msg)
-        io.emit('serverMessage', msg)
-    })
+        channel.assertQueue(queue, {
+            durable: false
+        })
 
-})
+        io.on('connection', (socket) => {
 
-app.get('/', (req, res) => {                // Garbage test client send
+            socket.join(queue)
+            socket.emit('configureClient', queue)
+
+            console.log(`User ${socket.id} connected`)
+        
+            socket.on('disconnect', () => {
+                console.log(`User ${socket.id} disconnected`)
+            })
+        
+            socket.on('clientMessage', (msg, target) => {
+                console.log(`Message ${msg} sent to ${target}`)
+                io.to(target).emit('serverMessage', msg)
+                channel.sendToQueue(queue, Buffer.from(msg));
+            })
+        })
+    });
+});
+
+
+
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 

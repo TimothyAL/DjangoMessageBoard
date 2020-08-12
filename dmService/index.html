@@ -15,12 +15,27 @@
     <script>
         let socket = io('http://localhost:40000');
 
+        socket.on('connect', () => {
+            console.log(socket.id)
+        })
+
+        clientConfig = {}
+
+        socket.on('configureClient', roomName => {
+            console.log(`The name of my room and queue is ${roomName}`)
+            clientConfig.room = roomName
+        })
+
         document.getElementById('chat_send').addEventListener('click', () => {
-            socket.emit('clientMessage', document.getElementById('chat_input').value)
+            socket.emit('clientMessage', socket.id + ': ' + document.getElementById('chat_input').value, clientConfig.room)
         })
 
         socket.on('serverMessage', msg => {
             document.getElementById('chat_history').innerHTML+="<li>"+msg+"</li>"
+        })
+
+        socket.on('disconnect', () => {
+            console.log('disconnected')
         })
 
     </script>
